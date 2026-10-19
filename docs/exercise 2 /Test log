@@ -1,1 +1,121 @@
+1. Summary Test
 
+
+- Input : Option 1 from the menu
+
+
+- Expected : Total visits : 18, Average per cell : 1.5, Room with highest total : Room 2 (7 visits), Busy rooms : 1
+
+
+- Result : Shows total visits 18, average 1.5, highest room 2, and 1 busy room. Works as expected.
+
+2. Look for Room 1 Test
+
+
+- Input : Option 2, then type 1
+
+
+- Expected : Room 1 total visits : 6, Status : Busy
+
+
+- Result : Shows room 1 has 6 visits and status Busy. Works as expected.
+
+3. Look for Room 3 Test
+
+
+- Input : Option 2, then type 3
+
+
+- Expected : Room 3 total visits : 5, Status : Not busy
+
+
+- Result : Shows room 3 has 5 visits and status Not busy. Works as expected.
+
+4. Type Room Number 0 Test
+
+
+- Input : Option 2, then type 0
+
+
+- Expected : Error message asking for a room between 1 and 3
+
+
+- Result : Shows error message and goes back to menu. Works as expected.
+
+5. Type Room Number 4 Test
+
+
+- Input : Option 2, then type 4
+
+
+- Expected : Error message asking for a room between 1 and 3
+
+
+- Result : Shows error message and goes back to menu. Works as expected.
+
+6. Type Letters for Room Test
+
+
+- Input : Option 2, then type abc
+
+
+- Expected : Error message asking for a valid number
+
+
+- Result : Shows error message without crashing. Works as expected.
+
+7. Type Letters for Menu Test
+
+
+- Input : Type xyz in main menu
+
+
+- Expected : Error message asking for a valid menu choice
+
+
+- Result : Shows error message without crashing. Works as expected.
+
+8. Wrong Menu Choice Test
+
+
+- Input : Type 5 in main menu
+
+
+- Expected : Error message saying choice is not supported
+
+
+- Result : Shows error message asking to pick 1, 2, or 0. Works as expected.
+
+9. Exit Test
+
+
+- Input : Type 0 in main menu
+
+
+- Expected : Exits the program
+
+
+- Result : Closes cleanly. Works as expected.
+
+10. Tie Check Test
+
+
+- Input : Option 1 when two rooms have the same top visits
+
+
+- Expected : Picks the lower room number
+
+
+- Result : Keeps Room 1 as highest. Works as expected.
+
+
+11. All Zero Visits Test
+
+
+- Input : Option 1 when all numbers are 0
+
+
+- Expected : Total visits : 0, Average : 0.0, Busy rooms : 0
+
+
+- Result : Calculates zeros correctly without breaking. Works as expected.
