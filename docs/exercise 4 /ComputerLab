@@ -1,0 +1,12 @@
+public class ComputerLab extends CampusResource {
+
+    private static final int FEE = 8;
+
+    public ComputerLab(String title, int capacity) {
+        super(title, capacity);
+    }
+
+    public int feePerSeat() {
+        return FEE;
+    }
+}
