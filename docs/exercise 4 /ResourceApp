@@ -1,0 +1,140 @@
+import java.util.Scanner;
+
+public class ResourceApp {
+
+    public static void main(String[] args) {
+
+        CampusResource[] catalog = {
+            new StudySpace("Quiet Study", 4),
+            new ComputerLab("Computer Lab", 3),
+            new StudySpace("Group Study", 2)
+        };
+
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
+
+        while (running) {
+
+            System.out.println();
+            System.out.println("--- Campus Resource Menu ---");
+            System.out.println("1 : Reserve");
+            System.out.println("2 : Cancel");
+            System.out.println("3 : Report");
+            System.out.println("0 : Exit");
+            System.out.print("Enter your choice : ");
+
+            String input = scanner.nextLine();
+            int choice;
+
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Error : Please enter a valid integer choice.");
+                continue;
+            }
+
+            if (choice == 0) {
+                System.out.println("Exiting program.");
+                running = false;
+            } else {
+                if (choice == 1) {
+                    processReservation(catalog, scanner, true);
+                } else {
+                    if (choice == 2) {
+                        processReservation(catalog, scanner, false);
+                    } else {
+                        if (choice == 3) {
+                            printReport(catalog);
+                        } else {
+                            System.out.println("Error : Unsupported choice. Please select 1, 2, 3, or 0.");
+                        }
+                    }
+                }
+            }
+        }
+
+        scanner.close();
+    }
+
+    public static void processReservation(CampusResource[] catalog, Scanner scanner, boolean isreserve) {
+        
+        System.out.print("Enter resource number (1 to " + catalog.length + ") : ");
+        String resinput = scanner.nextLine();
+        int resnum;
+
+        try {
+            resnum = Integer.parseInt(resinput);
+        } catch (NumberFormatException e) {
+            System.out.println("Error : Please enter a valid integer resource number.");
+            return;
+        }
+
+        if (resnum < 1) {
+            System.out.println("Error : Resource number must be between 1 and " + catalog.length + ".");
+            return;
+        }
+
+        if (resnum > catalog.length) {
+            System.out.println("Error : Resource number must be between 1 and " + catalog.length + ".");
+            return;
+        }
+
+        System.out.print("Enter seat count : ");
+        String seatinput = scanner.nextLine();
+        int seats;
+
+        try {
+            seats = Integer.parseInt(seatinput);
+        } catch (NumberFormatException e) {
+            System.out.println("Error : Please enter a valid integer seat count.");
+            return;
+        }
+
+        int index = resnum - 1;
+        CampusResource resource = catalog[index];
+        boolean success;
+
+        if (isreserve) {
+            success = resource.reserve(seats);
+        } else {
+            success = resource.cancel(seats);
+        }
+
+        if (success) {
+            System.out.println("Success : Operation completed.");
+        } else {
+            System.out.println("Rejected : Invalid seat amount or not enough space/reservations.");
+        }
+    }
+
+    public static void printReport(CampusResource[] catalog) {
+
+        StringBuilder report = new StringBuilder();
+        int totalrevenue = 0;
+
+        report.append("--- Campus Resource Report ---\n");
+
+        for (int i = 0; i < catalog.length; i++) {
+            CampusResource resource = catalog[i];
+            int num = i + 1;
+            int reserved = resource.getReserved();
+            int capacity = resource.getCapacity();
+            int remaining = capacity - reserved;
+            int revenue = resource.getRevenue();
+            double occupancy = resource.getOccupancy();
+
+            totalrevenue += revenue;
+
+            report.append("Resource ").append(num).append(" : ").append(resource.getTitle())
+                  .append(", Reserved : ").append(reserved)
+                  .append(", Remaining : ").append(remaining)
+                  .append(", Revenue : ").append(revenue)
+                  .append(", Occupancy : ").append(occupancy).append("\n");
+        }
+
+        report.append("Total Revenue : ").append(totalrevenue);
+
+        System.out.println();
+        System.out.println(report.toString());
+    }
+}
