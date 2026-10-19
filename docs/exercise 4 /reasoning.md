@@ -9,4 +9,4 @@ Priced only ensures that an item has a method to get a fee per seat. CampusResou
 Because people can cancel reservations later. If it weren't this way, the total reserved seats and revenue would be higher than what is currently active in the room.
 
 5. Why would rebuilding the catalog inside the menu loop lose reservations?
-If a new catalog is created every time the menu loops, all the previous rooms and their current bookings get erased and replaced with brand new empty rooms, losing all previous changes.
+If a new catalog is created every time the menu loops, all the previous rooms and their current bookings get erased and replaced with brand new empty rooms, losing all changes.
