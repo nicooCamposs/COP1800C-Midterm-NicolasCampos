@@ -1,0 +1,12 @@
+public class StudySpace extends CampusResource {
+
+    private static final int FEE = 3;
+
+    public StudySpace(String title, int capacity) {
+        super(title, capacity);
+    }
+
+    public int feePerSeat() {
+        return FEE;
+    }
+}
