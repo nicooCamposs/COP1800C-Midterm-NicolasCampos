@@ -9,4 +9,4 @@ People count rooms starting from 1, but Java starts counting positions from 0, s
 
 4. Explain how your comparison preserves the stated tie rule.
 
-To find the room with the most visits, we only update our top choice if a new room has strictly more visits than the current highest. If two rooms have the exact same total, the program keeps the first one it saw, which is the lower room number.
+To find the room with the most visits, we only update our top choice if a new room has strictly more visits than the current highest. If two rooms have the exact same total, the program keeps the lower room number since it'd come first.
