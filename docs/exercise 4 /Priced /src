@@ -1,0 +1,50 @@
+public interface Priced {
+int FeePerSeat();
+}
+
+public class StudyRoom {
+
+    private String title;
+    private final int capacity;
+    private int reserved;
+
+    public StudyRoom(String title, int capacity) {
+        this.title = title;
+        this.capacity = capacity;
+        this.reserved = 0;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getReserved() {
+        return reserved;
+    }
+
+    public boolean reserve(int seats) {
+        if (seats < 1) {
+            return false;
+        }
+        if (reserved + seats > capacity) {
+            return false;
+        }
+        reserved += seats;
+        return true;
+    }
+
+    public boolean cancel(int seats) {
+        if (seats < 1) {
+            return false;
+        }
+        if (seats > reserved) {
+            return false;
+        }
+        reserved -= seats;
+        return true;
+    }
+}
