@@ -3,6 +3,8 @@
 ## Exercise 1: Study Budget
 
 1. Base Example
+
+
    Input: name = " Ana Lee ", minutes = 95, isActive = true
 
 
@@ -12,6 +14,8 @@
    Output: Worked as expected. Cleaned the name, calculated 3 blocks and $15 base fee.
 
 3. 120 mins, Active
+
+
    Input: name = "Ana Lee", minutes = 120, isActive = true
 
 
@@ -21,7 +25,9 @@
    Output: Worked. Reached 4 blocks so it applied $4.00 discount, final fee was $16.00.
 
 5. 120 mins, Inactive
-   Input: name = "Ana Lee", minutes = 120, isActive = false
+
+
+    Input: name = "Ana Lee", minutes = 120, isActive = false
 
 
    Predicted: 4 blocks, $20 base fee, no discount.
@@ -30,6 +36,8 @@
    Output: Worked. Inactive membership blocked the discount even with 4 blocks.
 
 7. 29 mins Visit
+
+
    Input: name = "Ana Lee", minutes = 29, isActive = true
 
 
@@ -39,6 +47,8 @@
    Output: Worked. Under 30 minutes gives 0 complete blocks and $0 base fee.
 
 9. Blank Name Error
+
+
    Input: name = "   ", minutes = 95, isActive = true
 
 
@@ -48,6 +58,8 @@
    Output: Worked. Printed "Error: Your name is blank." and stopped execution.
 
 11. Zero Minutes Error
+
+
 Input: name = "Ana Lee", minutes = 0, isActive = true
 
 
@@ -57,6 +69,8 @@ Predicted: Error message for invalid time, halts program.
 Output: Worked. Printed "Error: Time has to be greater than zero." and stopped.
 
 13. Custom Test - 60 mins
+
+
 Input: name = "Ana Lee", minutes = 60, isActive = true
 
 
