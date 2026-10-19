@@ -1,1 +1,146 @@
+import java.util.Scanner;
 
+public class AttendanceAnalyzer {
+
+    public static void main(String[] args) {
+        
+        int[][] visits = {
+            {2, 0, 3, 1},
+            {1, 4, 0, 2},
+            {0, 2, 2, 1}
+        };
+
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
+
+        while (running) {
+            
+            System.out.println();
+            System.out.println("--- Attendance Analyzer Menu ---");
+            System.out.println("1 : Summary");
+            System.out.println("2 : Find room");
+            System.out.println("0 : Exit");
+            System.out.print("Enter your choice : ");
+
+            String input = scanner.nextLine();
+            int choice;
+
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Error : Please enter a valid integer choice.");
+                continue;
+            }
+
+            if (choice == 0) {
+                System.out.println("Exiting program.");
+                running = false;
+            } else {
+                if (choice == 1) {
+                    printSummary(visits);
+                } else {
+                    if (choice == 2) {
+                        System.out.print("Enter room number (1 to " + visits.length + ") : ");
+                        String roominput = scanner.nextLine();
+                        int roomnum;
+
+                        try {
+                            roomnum = Integer.parseInt(roominput);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Error : Please enter a valid integer room number.");
+                            continue;
+                        }
+
+                        if (roomnum < 1) {
+                            System.out.println("Error : Room number must be between 1 and " + visits.length + ".");
+                            continue;
+                        }
+
+                        if (roomnum > visits.length) {
+                            System.out.println("Error : Room number must be between 1 and " + visits.length + ".");
+                            continue;
+                        }
+
+                        int roomidx = roomnum - 1;
+                        int[] totals = roomTotals(visits);
+                        int roomtotal = totals[roomidx];
+                        boolean isbusy = roomtotal >= 6;
+
+                        System.out.println("Room " + roomnum + " total visits : " + roomtotal);
+                        System.out.println("Status : " + (isbusy ? "Busy" : "Not busy"));
+                    } else {
+                        System.out.println("Error : Unsupported choice. Please select 1, 2, or 0.");
+                    }
+                }
+            }
+        }
+        
+        scanner.close();
+    }
+
+    public static int[] roomTotals(int[][] visits) {
+        
+        int[] totals = new int[visits.length];
+        
+        for (int row = 0; row < visits.length; row++) {
+            int rowsum = 0;
+            for (int col = 0; col < visits[row].length; col++) {
+                rowsum += visits[row][col];
+            }
+            totals[row] = rowsum;
+        }
+        
+        return totals;
+    }
+
+    public static int[] periodTotals(int[][] visits) {
+        
+        int cols = visits[0].length;
+        int[] totals = new int[cols];
+        
+        for (int col = 0; col < cols; col++) {
+            int colsum = 0;
+            for (int row = 0; row < visits.length; row++) {
+                colsum += visits[row][col];
+            }
+            totals[col] = colsum;
+        }
+        
+        return totals;
+    }
+
+    public static void printSummary(int[][] visits) {
+        
+        int[] rtotals = roomTotals(visits);
+        int grandtotal = 0;
+        int totalcells = 0;
+        int maxtotal = -1;
+        int maxroom = 1;
+        int busycount = 0;
+
+        for (int row = 0; row < rtotals.length; row++) {
+            grandtotal += rtotals[row];
+            if (rtotals[row] >= 6) {
+                busycount++;
+            }
+            if (rtotals[row] > maxtotal) {
+                maxtotal = rtotals[row];
+                maxroom = row + 1;
+            }
+        }
+
+        for (int row = 0; row < visits.length; row++) {
+            totalcells += visits[row].length;
+        }
+
+
+        double average = totalcells > 0 ? (double) grandtotal / totalcells : 0.0;
+
+        System.out.println();
+        System.out.println("--- Attendance Summary ---");
+        System.out.println("Total visits : " + grandtotal);
+        System.out.println("Average per cell : " + average);
+        System.out.println("Room with highest total : Room " + maxroom + " (" + maxtotal + " visits)");
+        System.out.println("Number of busy rooms : " + busycount);
+    }
+}
