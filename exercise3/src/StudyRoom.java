@@ -1,46 +1,71 @@
 public class StudyRoom {
-    private String Title;
-    private final int Capacity;
-    private int Reserved;
+    private String title;
+    private final int capacity;
+    private int reserved;
 
-    public StudyRoom(String Title, int Capacity) {
-        if (Title == null || Title.trim().isEmpty()) {
-            throw new IllegalArgumentException("The Title must not be null or blank.");
+    public StudyRoom(String inputTitle, int inputCapacity) {
+        if (inputTitle == null) {
+            throw new IllegalArgumentException("Error: The title is null or blank.");
         }
-        if (Capacity <= 0) {
-            throw new IllegalArgumentException("Capacity must be positive.");
+        if (inputTitle.trim().isBlank()) {
+            throw new IllegalArgumentException("Error: The title is null or blank.");
         }
-        this.Title = Title.trim();
-        this.Capacity = Capacity;
-        this.Reserved = 0;
+        if (inputCapacity <= 0) {
+            throw new IllegalArgumentException("Capacity must be more than 0.");
+        }
+        title = inputTitle.trim();
+        capacity = inputCapacity;
+        reserved = 0;
     }
 
-    public StudyRoom(String Title) {
-        this(Title, 4);
+    public StudyRoom(String inputTitle) {
+        this(inputTitle, 4);
     }
 
-    public String getTitle()  { return Title; }
-    public int getCapacity()  { return Capacity; }
-    public int getReserved()  { return Reserved; }
-    public int getRemaining() { return Capacity - Reserved; }
+    public String getTitle()  {
+    return title; 
+    }
+    
+    public int getCapacity()  { 
+        return capacity; 
+    }
+    
+    
+    public int getReserved()  
+    {
+    return reserved;
+    }
+    
+    
+    public int getRemaining() 
+    {
+    return capacity - reserved;
+    }
 
-    public boolean reservation(int seats) {
-        if (seats <= 0 || seats > getRemaining()) {
+    public boolean reserve(int seats) {
+        if (seats <= 0) {
             return false;
         }
-        Reserved += seats;
+        if (seats > getRemaining()) {
+            return false;
+        }
+        reserved += seats;
         return true;
     }
 
-    public boolean reservation() {
-        return reservation(1);
+    
+    public boolean reserve() {
+        return reserve(1);
     }
 
     public boolean cancel(int seats) {
-        if (seats <= 0 || seats > Reserved) {
+        if (seats <= 0) {
             return false;
         }
-        Reserved -= seats;
+        if (seats > reserved) {
+            return false;
+        }
+        reserved -= seats;
         return true;
     }
 }
