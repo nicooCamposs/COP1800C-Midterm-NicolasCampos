@@ -1,0 +1,19 @@
+public abstract class CampusResource extends StudyRoom implements Priced {
+
+    public CampusResource(String title, int capacity) {
+        super(title, capacity);
+    }
+
+    public abstract int feePerSeat();
+
+    public int getRevenue() {
+        return getReserved() * feePerSeat();
+    }
+
+    public double getOccupancy() {
+        if (getCapacity() == 0) {
+            return 0.0;
+        }
+        return (double) getReserved() / getCapacity();
+    }
+}
