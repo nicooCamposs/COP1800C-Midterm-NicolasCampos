@@ -1,10 +1,10 @@
-# Reasoning and Critical Thinking Answers
+Nicolas Campos - Java midterm ex 2. Reasoning 
 
-## Answer E3-R1: Why can changing state before validation violate the invariant?
-The invariant requires that reserved seats must always remain between zero and the total capacity[cite: 5]. If state changes occur before validating inputs against boundaries or available capacity, an invalid modification could temporarily corrupt the object state or leave fields inconsistent before an exception or rejection occurs.
+Why can changing state before validation break the rules?
+Because if internal information is modified before checking that data is correct, the system could temporarily store invalid data before detecting the error.
 
-## Answer E3-R2: How are the two reserve methods an example of overloading?
-Overloading occurs when multiple methods share the exact same name within a class but possess different parameter lists[cite: 5, 6]. In this project, reserve() takes no parameters and delegates to reserve(int seats), which takes an integer parameter, providing flexibility in calling conventions.
+How are the two reservation methods an example of overloading?
+It occurs when two methods share the exact same name but have different inputs. One receives no data and reserves a space by default, while the other receives a specific numerical quantity of seats.
 
-## Answer E3-R3: Create a second independent room and an alias referencing the first; explain which object changes after a reservation through the alias.
-An alias is a second reference pointing to the exact same object instance in memory rather than creating a distinct copy[cite: 5, 6]. When a reservation is made through the alias, the underlying shared object state changes, meaning both the original reference and the alias reflect the updated reserved seat count. The second independent room remains completely unaffected because it points to a separate object instance[cite: 5].
+Create an independent room and an alias; explain which one changes.
+An alias is another variable pointing to the exact same object in memory. If modified using the alias, the original room changes because they share the same space. The independent room is a completely separate object and is not affected.
