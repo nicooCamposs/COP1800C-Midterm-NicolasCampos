@@ -1,5 +1,4 @@
 ///Nicolás Campos - Java Midterm Exercise 1
-
 public class StudyBudget {
     private static final int Blocks = 30;
     private static final int FeePerBlock = 5;
