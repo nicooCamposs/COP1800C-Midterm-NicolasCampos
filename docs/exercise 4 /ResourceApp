@@ -23,15 +23,7 @@ public class ResourceApp {
             System.out.println("0 : Exit");
             System.out.print("Enter your choice : ");
 
-            String input = scanner.nextLine();
-            int choice;
-
-            try {
-                choice = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Error : Please enter a valid integer choice.");
-                continue;
-            }
+            int choice = Integer.parseInt(scanner.nextLine());
 
             if (choice == 0) {
                 System.out.println("Exiting program.");
@@ -46,7 +38,7 @@ public class ResourceApp {
                         if (choice == 3) {
                             printReport(catalog);
                         } else {
-                            System.out.println("Error : Unsupported choice. Please select 1, 2, 3, or 0.");
+                            System.out.println("Error : Unsupported choice.");
                         }
                     }
                 }
@@ -59,36 +51,10 @@ public class ResourceApp {
     public static void processReservation(CampusResource[] catalog, Scanner scanner, boolean isreserve) {
         
         System.out.print("Enter resource number (1 to " + catalog.length + ") : ");
-        String resinput = scanner.nextLine();
-        int resnum;
-
-        try {
-            resnum = Integer.parseInt(resinput);
-        } catch (NumberFormatException e) {
-            System.out.println("Error : Please enter a valid integer resource number.");
-            return;
-        }
-
-        if (resnum < 1) {
-            System.out.println("Error : Resource number must be between 1 and " + catalog.length + ".");
-            return;
-        }
-
-        if (resnum > catalog.length) {
-            System.out.println("Error : Resource number must be between 1 and " + catalog.length + ".");
-            return;
-        }
+        int resnum = Integer.parseInt(scanner.nextLine());
 
         System.out.print("Enter seat count : ");
-        String seatinput = scanner.nextLine();
-        int seats;
-
-        try {
-            seats = Integer.parseInt(seatinput);
-        } catch (NumberFormatException e) {
-            System.out.println("Error : Please enter a valid integer seat count.");
-            return;
-        }
+        int seats = Integer.parseInt(scanner.nextLine());
 
         int index = resnum - 1;
         CampusResource resource = catalog[index];
@@ -103,7 +69,7 @@ public class ResourceApp {
         if (success) {
             System.out.println("Success : Operation completed.");
         } else {
-            System.out.println("Rejected : Invalid seat amount or not enough space/reservations.");
+            System.out.println("Rejected : Invalid operation.");
         }
     }
 
@@ -114,9 +80,9 @@ public class ResourceApp {
 
         report.append("--- Campus Resource Report ---\n");
 
-        for (int i = 0; i < catalog.length; i++) {
-            CampusResource resource = catalog[i];
-            int num = i + 1;
+        for (int index = 0; index < catalog.length; index++) {
+            CampusResource resource = catalog[index];
+            int num = index + 1;
             int reserved = resource.getReserved();
             int capacity = resource.getCapacity();
             int remaining = capacity - reserved;
